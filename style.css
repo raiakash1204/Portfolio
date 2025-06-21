@@ -1118,6 +1118,21 @@ body {
   word-break: break-all;
 }
 
+.contact-item a{
+  text-decoration:none;
+  color:var(--text-primary);
+}
+
+.contact-item a:hover{
+  text-decoration:none;
+  color:var(--text-primary);
+
+  text-shadow:0 0 0.5px black;
+}
+
+
+
+
 /* Contact Form */
 .contact-form {
   padding: var(--spacing-2xl);
@@ -1739,4 +1754,35 @@ textarea:focus-visible {
     min-height: auto;
     padding: var(--spacing-2xl) 0;
   }
+}
+
+
+
+
+
+
+/* favicons styling */
+
+.fa-linkedin-in{
+  color:#0077b5;
+}
+
+.fa-phone{
+  color:red;
+  text-shadow:0px 0px 1px black, 1px 1px 10px red;
+}
+
+.fa-html5{
+  color:var(--primary-color);
+}
+
+.fa-css3-alt{
+  color:var(--secondary-color);
+}
+
+.fa-js{
+  color:var(--accent-color);
+}
+.fa-python{
+  color:#4584b6;
 }
