@@ -154,7 +154,7 @@ function populateCertifications() {
     certificationsGrid.appendChild(certCard);
   });
 }
-s
+
 function populateContactInfo() {
   const contactInfo = document.getElementById('contact-info');
   contactInfo.innerHTML = '';
