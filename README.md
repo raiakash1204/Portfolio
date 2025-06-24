@@ -1,5 +1,4 @@
 ## **Project Overview**  
-**Project Name:** Ria Kash's Portfolio Website  
 **Deployment URL:** [https://raiakash1204.netlify.app/](https://raiakash1204.netlify.app/)  
 **Repository:** [https://www.github.com/raiakash1204/Portfolio]  
 **Developer:** [Akash Rai]    
@@ -80,7 +79,7 @@ netlify deploy      # Manual deploy (or auto via Git hooks)
 ```  
 
 ### **3. Testing**  
-- **Lighthouse Audit** – Achieved a score of 93 on performance, and accessibility and a perfect score of 100 on SEO.  
+- **Lighthouse Audit** – Achieved a score of >90 on performance, and accessibility and a perfect score of 100 on SEO.  
 - **Cross-Browser Testing** – Chrome, Firefox, Safari, Edge.  
 - **Device Testing** – Chrome DevTools + Physical devices.  
 
