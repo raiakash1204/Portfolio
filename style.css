@@ -1,5 +1,4 @@
-/* CSS Custom Properties */
-:root {
+ :root {
   /* Colors */
   --primary-color: #3B82F6;
   --secondary-color: #8B5CF6;
@@ -113,9 +112,10 @@ body {
   background-color: var(--bg-primary);
   transition: background-color var(--transition-normal), color var(--transition-normal);
   overflow-x: hidden;
+  cursor:none;
 }
 
-/* Remove default cursor for all clickable elements */
+/* Remove default cursor */
 a, button, input, textarea, select, .clickable, .nav-link, .btn, .project-card, .skill-item, .filter-btn, .contact-item, .cert-card, .modal-close, .hamburger, .theme-toggle, .back-to-top {
   cursor: none !important;
 }
@@ -140,7 +140,7 @@ a, button, input, textarea, select, .clickable, .nav-link, .btn, .project-card, 
   }
 }
 
-/* Beautiful Firefly Cursor System */
+/*Firefly Cursor*/
 .cursor {
   position: fixed;
   pointer-events: none;
@@ -564,13 +564,25 @@ a, button, input, textarea, select, .clickable, .nav-link, .btn, .project-card, 
   z-index: 1;
 }
 
-.particle {
+[data-theme="dark"] .particle {
   position: absolute;
-  background: var(--primary-color);
+  background:radial-gradient(circle, #FFD700 0%, #FFA500 30%, #FF8C00 60%, transparent 80%);;
   border-radius: 50%;
   opacity: 0.6;
   animation: float 6s ease-in-out infinite;
 }
+
+
+[data-theme="light"] .particle {
+  position: absolute;
+  background:var(--primary-color);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite;
+}
+
+
+
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
@@ -853,7 +865,7 @@ a, button, input, textarea, select, .clickable, .nav-link, .btn, .project-card, 
   fill: var(--bg-primary);
 }
 
-/* Timeline Styles - FIXED FOR MOBILE */
+/* Timeline Styles*/
 .timeline {
   position: relative;
   max-width: 800px;
@@ -956,7 +968,7 @@ a, button, input, textarea, select, .clickable, .nav-link, .btn, .project-card, 
   font-weight: 600;
 }
 
-/* Skills Section - FIXED WITH FLOATING BAR */
+/* Skills Section */
 .skills-section {
   position: relative;
 }
@@ -1113,7 +1125,7 @@ a, button, input, textarea, select, .clickable, .nav-link, .btn, .project-card, 
   font-weight: 500;
 }
 
-/* Certifications Section - Redesigned */
+/* Certifications Section */
 .certifications-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -1739,7 +1751,7 @@ a, button, input, textarea, select, .clickable, .nav-link, .btn, .project-card, 
     font-size: clamp(2rem, 6vw, 4rem);
   }
   
-  /* Mobile Timeline Fix - IMPROVED */
+  /* Mobile Timeline */
   .timeline::before {
     left: 30px;
   }
@@ -1828,7 +1840,7 @@ a, button, input, textarea, select, .clickable, .nav-link, .btn, .project-card, 
     height: 40px;
   }
   
-  /* Timeline mobile improvements - FINAL FIX */
+  /* Timeline mobile */
   .timeline::before {
     left: 20px;
   }

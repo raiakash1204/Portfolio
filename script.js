@@ -8,7 +8,7 @@ let isDeleting = false;
 let mouseX = 0, mouseY = 0;
 let cursorX = 0, cursorY = 0;
 let fireflies = [];
-const maxFireflies = 12;
+const maxFireflies = 100;
 let lastFireflyTime = 0;
 
 // Initialize application
@@ -34,19 +34,19 @@ function populateContent() {
   document.getElementById('hero-last-name').textContent = personalData.personal.name.last;
   document.getElementById('hero-description').textContent = personalData.personal.description;
   
-  // Populate education timeline
+
   populateEducation();
   
-  // Populate skills
+
   populateSkills();
   
-  // Populate projects
+
   populateProjects();
   
-  // Populate certifications
+
   populateCertifications();
   
-  // Populate contact info
+
   populateContactInfo();
 }
 
@@ -127,7 +127,7 @@ function populateProjects() {
   });
 }
 
-// Populate certifications - Redesigned
+// Populate certifications
 function populateCertifications() {
   const certificationsGrid = document.getElementById('certifications-grid');
   certificationsGrid.innerHTML = '';
@@ -154,8 +154,7 @@ function populateCertifications() {
     certificationsGrid.appendChild(certCard);
   });
 }
-
-// Populate contact info with clickable links
+s
 function populateContactInfo() {
   const contactInfo = document.getElementById('contact-info');
   contactInfo.innerHTML = '';
@@ -201,7 +200,7 @@ function populateContactInfo() {
   });
 }
 
-// Theme Management
+// Theme
 function initializeTheme() {
   document.documentElement.setAttribute('data-theme', currentTheme);
   
@@ -227,7 +226,7 @@ function initializePreloader() {
   }, 2000);
 }
 
-// Firefly Cursor System
+// Firefly Cursor
 function initializeFireflyCursor() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
@@ -293,7 +292,7 @@ function initializeFireflyCursor() {
 }
 
 function createFirefly(x, y, isExplosion = false) {
-  // Clean up old fireflies
+  // delete old fireflies
   if (fireflies.length >= maxFireflies) {
     const oldFirefly = fireflies.shift();
     if (oldFirefly && oldFirefly.parentNode) {
@@ -353,8 +352,7 @@ function initializeNavigation() {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
   });
-  
-  // Smooth scrolling and active link highlighting
+
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -374,8 +372,7 @@ function initializeNavigation() {
       navMenu.classList.remove('active');
     });
   });
-  
-  // Update active navigation link based on scroll position
+
   window.addEventListener('scroll', updateActiveNavLink);
 }
 
@@ -414,7 +411,7 @@ function initializeScrollEffects() {
     scrollProgress.style.width = scrollPercent + '%';
   });
   
-  // Intersection Observer for animations
+
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -505,38 +502,35 @@ function initializeParticles() {
     particlesContainer.appendChild(particle);
   }
 }
-
-// Skills Filter - FIXED AND WORKING
+//Skills section
 function initializeSkillFilters() {
   const filterButtons = document.querySelectorAll('.filter-btn');
   const skillItems = document.querySelectorAll('.skill-item');
-  
-  // Show all skills initially
+
   skillItems.forEach(item => {
     item.style.display = 'block';
     item.classList.add('visible');
   });
   
-  // Handle filter functionality
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
       const filter = button.getAttribute('data-filter');
       
-      // Update active button
+
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
       
-      // Filter skills
+
       skillItems.forEach(item => {
         const category = item.getAttribute('data-category');
         
         if (filter === 'all' || category === filter) {
-          // Show skill
+
           item.style.display = 'block';
           item.classList.remove('hidden');
           item.classList.add('visible');
         } else {
-          // Hide skill
+
           item.classList.remove('visible');
           item.classList.add('hidden');
           setTimeout(() => {
@@ -550,7 +544,8 @@ function initializeSkillFilters() {
   });
 }
 
-// Form Handling for Netlify
+
+// Form Handling
 function initializeFormHandling() {
   const contactForm = document.getElementById('contact-form');
   const formMessage = document.getElementById('form-message');
@@ -561,7 +556,7 @@ function initializeFormHandling() {
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const formData = new FormData(contactForm);
     
-    // Show loading state
+  
     submitButton.classList.add('loading');
     
     try {
@@ -601,7 +596,7 @@ function initializeProjectModals() {
   const modalBody = document.getElementById('modal-body');
   const modalClose = document.querySelector('.modal-close');
   
-  // Add click listeners to project cards
+
   document.addEventListener('click', (e) => {
     const projectCard = e.target.closest('.project-card');
     if (projectCard) {
@@ -708,7 +703,6 @@ window.addEventListener('resize', debounce(() => {
   }
 }, 250));
 
-// Additional particle creation function (needed for resize handler)
 function createParticle() {
   const particlesContainer = document.getElementById('particles');
   if (!particlesContainer) return;
