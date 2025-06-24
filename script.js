@@ -1,125 +1,21 @@
 // Global variables
 let currentTheme = localStorage.getItem('theme') || 'light';
-let typingTexts = [
-  'Artificial Intelligence',
-  'Machine Learning',
-  'Large Language Models',
-  'Web Development',
-  'Backend Development',
-  'Audio DSP',
-  'Systems Engineering',
-  'Sound Design',
-  '3D Modelling'
-];
 let typingIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
 
-// Project data
-const projectData = {
-  'cruciatus': {
-    title: 'Cruciatus – AI Math Solver',
-    description: 'An advanced AI-powered application that detects and solves handwritten mathematical equations using computer vision and machine learning.',
-    fullDescription: 'Developed for KodeKurrent 2025 PS101, Cruciatus combines cutting-edge technologies to create a seamless math-solving experience. The system uses OpenCV for image preprocessing, PyTorch for deep learning models, and the Gemini API for enhanced mathematical reasoning.',
-    technologies: ['Flask', 'SQLite', 'Gemini API', 'PyTorch', 'OpenCV', 'NumPy', 'Matplotlib'],
-    features: [
-      'Real-time handwritten equation detection',
-      'Multi-format equation support',
-      'Step-by-step solution breakdown',
-      'User history and progress tracking',
-      'RESTful API for integration'
-    ],
-    challenges: 'Achieving high accuracy in handwritten character recognition while maintaining real-time performance was the primary challenge. We implemented custom preprocessing algorithms and optimized model inference.',
-    github: 'https://github.com/raiakash1204',
-    demo: '#'
-  },
-  'startup-portal': {
-    title: 'Startup Registration Portal',
-    description: 'A comprehensive web portal developed for the Ministry of AYUSH supporting multilingual startup registrations.',
-    fullDescription: 'Built as part of SIH1642, this portal streamlines the startup registration process for the Ministry of AYUSH. The system supports multiple Indian languages and provides a user-friendly interface for entrepreneurs.',
-    technologies: ['Django', 'Bootstrap', 'JavaScript', 'SQLite', 'HTML5', 'CSS3'],
-    features: [
-      'Multilingual support (Hindi, English, and regional languages)',
-      'Document upload and verification',
-      'Application status tracking',
-      'Admin dashboard for processing',
-      'Email notifications and alerts'
-    ],
-    challenges: 'Implementing robust multilingual support while ensuring data consistency across different language inputs required careful database design and extensive testing.',
-    github: 'https://github.com/raiakash1204',
-    demo: '#'
-  },
-  'handwriting-ai': {
-    title: 'AI Model for Handwritten Character Recognition',
-    description: 'A Convolutional Neural Network achieving 98% accuracy on handwritten character recognition tasks.',
-    fullDescription: 'This project implements a state-of-the-art CNN architecture trained on EMNIST and MNIST datasets. The model incorporates advanced preprocessing techniques and data augmentation for robust character recognition.',
-    technologies: ['Python', 'TensorFlow', 'Keras', 'NumPy', 'OpenCV', 'Matplotlib'],
-    features: [
-      '98% accuracy on test datasets',
-      'Support for letters and digits',
-      'Real-time inference capability',
-      'Data augmentation pipeline',
-      'Model performance visualization'
-    ],
-    challenges: 'Balancing model complexity with performance while achieving high accuracy across diverse handwriting styles required extensive hyperparameter tuning and architecture optimization.',
-    github: 'https://github.com/raiakash1204',
-    demo: '#'
-  },
-  'todo-app': {
-    title: 'Todo List Application',
-    description: 'A full-stack web application with user authentication and comprehensive task management features.',
-    fullDescription: 'A complete task management solution built with Flask, featuring user authentication, task categorization, and progress tracking. The application provides a clean, intuitive interface for managing daily tasks.',
-    technologies: ['Flask', 'SQLite', 'HTML5', 'CSS3', 'JavaScript', 'Bootstrap'],
-    features: [
-      'User registration and authentication',
-      'Task creation, editing, and deletion',
-      'Task categories and priorities',
-      'Due date reminders',
-      'Progress tracking and statistics'
-    ],
-    challenges: 'Implementing secure user authentication and designing an efficient database schema for task relationships while maintaining application performance.',
-    github: 'https://github.com/raiakash1204',
-    demo: '#'
-  },
-  'tux-lite': {
-    title: 'Tux-lite Linux Distribution',
-    description: 'A custom lightweight Linux distribution based on Arch Linux, optimized for legacy hardware.',
-    fullDescription: 'Tux-lite is a custom Linux distribution built on Arch Linux with LXQt desktop environment. Designed specifically for legacy hardware, it provides a modern Linux experience with minimal resource usage.',
-    technologies: ['Arch Linux', 'LXQt', 'systemd', 'bash', 'pacman'],
-    features: [
-      'Lightweight LXQt desktop environment',
-      'Optimized for legacy hardware',
-      'Custom systemd services',
-      'Pre-configured development tools',
-      'Minimal resource footprint'
-    ],
-    challenges: 'Creating a stable, lightweight distribution while maintaining compatibility with modern software required careful package selection and extensive testing on various hardware configurations.',
-    github: 'https://github.com/raiakash1204',
-    demo: '#'
-  },
-  'equalizer': {
-    title: '3Q – 3-Band Equalizer Plugin',
-    description: 'A professional audio plugin featuring real-time DSP processing and spectrum analysis.',
-    fullDescription: 'Built with the JUCE framework, 3Q is a professional-grade 3-band equalizer plugin with real-time spectrum analysis. The plugin features low, mid, and high frequency controls with visual feedback.',
-    technologies: ['C++', 'JUCE Framework', 'DSP', 'Audio Programming'],
-    features: [
-      'Real-time 3-band equalization',
-      'Spectrum analyzer with visual feedback',
-      'Low-latency audio processing',
-      'Cross-platform compatibility',
-      'Professional audio quality'
-    ],
-    challenges: 'Implementing real-time audio processing with minimal latency while providing accurate spectrum analysis required deep understanding of DSP principles and optimization techniques.',
-    github: 'https://github.com/raiakash1204',
-    demo: '#'
-  }
-};
+// Firefly cursor variables
+let mouseX = 0, mouseY = 0;
+let cursorX = 0, cursorY = 0;
+let fireflies = [];
+const maxFireflies = 12;
+let lastFireflyTime = 0;
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', function() {
   initializeTheme();
   initializePreloader();
-  initializeCursor();
+  initializeFireflyCursor();
   initializeNavigation();
   initializeScrollEffects();
   initializeTypingAnimation();
@@ -127,9 +23,183 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeSkillFilters();
   initializeFormHandling();
   initializeProjectModals();
-  initializeAnimations();
   initializeBackToTop();
+  populateContent();
 });
+
+// Populate content from data
+function populateContent() {
+  // Populate hero section
+  document.getElementById('hero-first-name').textContent = personalData.personal.name.first;
+  document.getElementById('hero-last-name').textContent = personalData.personal.name.last;
+  document.getElementById('hero-description').textContent = personalData.personal.description;
+  
+  // Populate education timeline
+  populateEducation();
+  
+  // Populate skills
+  populateSkills();
+  
+  // Populate projects
+  populateProjects();
+  
+  // Populate certifications
+  populateCertifications();
+  
+  // Populate contact info
+  populateContactInfo();
+}
+
+// Populate education timeline
+function populateEducation() {
+  const timeline = document.getElementById('education-timeline');
+  timeline.innerHTML = '';
+  
+  personalData.education.forEach((edu, index) => {
+    const timelineItem = document.createElement('div');
+    timelineItem.className = 'timeline-item';
+    timelineItem.setAttribute('data-year', edu.year);
+    
+    timelineItem.innerHTML = `
+      <div class="timeline-content glass-card">
+        <div class="timeline-marker"></div>
+        <h3>${edu.degree}</h3>
+        ${edu.specialization ? `<h4>${edu.specialization}</h4>` : ''}
+        <p class="institution">${edu.institution}</p>
+        <p class="location">${edu.location}</p>
+        <span class="timeline-year">${edu.period}</span>
+      </div>
+    `;
+    
+    timeline.appendChild(timelineItem);
+  });
+}
+
+// Populate skills
+function populateSkills() {
+  const skillsGrid = document.getElementById('skills-grid');
+  skillsGrid.innerHTML = '';
+  
+  Object.keys(personalData.skills).forEach(category => {
+    personalData.skills[category].forEach(skill => {
+      const skillItem = document.createElement('div');
+      skillItem.className = 'skill-item glass-card';
+      skillItem.setAttribute('data-category', category);
+      
+      const iconHtml = skill.icon.startsWith('fa') 
+        ? `<i class="${skill.icon}" style="color: ${skill.color}"></i>`
+        : skill.icon;
+      
+      skillItem.innerHTML = `
+        <div class="skill-icon">${iconHtml}</div>
+        <h3>${skill.name}</h3>
+      `;
+      
+      skillsGrid.appendChild(skillItem);
+    });
+  });
+}
+
+// Populate projects
+function populateProjects() {
+  const projectsGrid = document.getElementById('projects-grid');
+  projectsGrid.innerHTML = '';
+  
+  personalData.projects.forEach(project => {
+    const projectCard = document.createElement('div');
+    projectCard.className = 'project-card clay-card';
+    projectCard.setAttribute('data-project', project.id);
+    
+    projectCard.innerHTML = `
+      <div class="project-image">
+        <div class="project-icon">${project.icon}</div>
+      </div>
+      <div class="project-content">
+        <h3>${project.title}</h3>
+        <p>${project.shortDescription}</p>
+        <div class="project-tech">
+          ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+        </div>
+      </div>
+    `;
+    
+    projectsGrid.appendChild(projectCard);
+  });
+}
+
+// Populate certifications - Redesigned
+function populateCertifications() {
+  const certificationsGrid = document.getElementById('certifications-grid');
+  certificationsGrid.innerHTML = '';
+  
+  personalData.certifications.forEach(cert => {
+    const certCard = document.createElement('div');
+    certCard.className = 'cert-card clay-card';
+    
+    certCard.innerHTML = `
+      <div class="cert-header">
+        <div class="cert-icon">${cert.icon}</div>
+        <div class="cert-info">
+          <h3>${cert.title}</h3>
+          <div class="cert-subtitle">${cert.subtitle}</div>
+        </div>
+      </div>
+      <p class="cert-description">${cert.description}</p>
+      <div class="cert-footer">
+        <span class="cert-year">${cert.year}</span>
+        <span class="cert-organization">${cert.organization}</span>
+      </div>
+    `;
+    
+    certificationsGrid.appendChild(certCard);
+  });
+}
+
+// Populate contact info with clickable links
+function populateContactInfo() {
+  const contactInfo = document.getElementById('contact-info');
+  contactInfo.innerHTML = '';
+  
+  const contactItems = [
+    { 
+      icon: '<i class="fas fa-phone" style="color: #10B981;"></i>', 
+      title: 'Phone', 
+      value: personalData.personal.contact.phone,
+      link: `tel:${personalData.personal.contact.phone}`
+    },
+    { 
+      icon: '<i class="fas fa-envelope" style="color: #F59E0B;"></i>', 
+      title: 'Email', 
+      value: personalData.personal.contact.email,
+      link: `mailto:${personalData.personal.contact.email}`
+    },
+    { 
+      icon: '<i class="fab fa-github" style="color: #6B7280;"></i>', 
+      title: 'GitHub', 
+      value: personalData.personal.contact.github,
+      link: `https://${personalData.personal.contact.github}`
+    },
+    { 
+      icon: '<i class="fab fa-linkedin" style="color: #0077B5;"></i>', 
+      title: 'LinkedIn', 
+      value: personalData.personal.contact.linkedin,
+      link: `https://${personalData.personal.contact.linkedin}`
+    }
+  ];
+  
+  contactItems.forEach(item => {
+    const contactItem = document.createElement('div');
+    contactItem.className = 'contact-item glass-card';
+    
+    contactItem.innerHTML = `
+      <div class="contact-icon">${item.icon}</div>
+      <h3>${item.title}</h3>
+      <a href="${item.link}" class="contact-link" target="_blank" rel="noopener noreferrer">${item.value}</a>
+    `;
+    
+    contactInfo.appendChild(contactItem);
+  });
+}
 
 // Theme Management
 function initializeTheme() {
@@ -157,50 +227,109 @@ function initializePreloader() {
   }, 2000);
 }
 
-// Custom Cursor
-function initializeCursor() {
+// Firefly Cursor System
+function initializeFireflyCursor() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }
 
   const cursor = document.getElementById('cursor');
-  const cursorTrail = document.getElementById('cursor-trail');
   
-  let mouseX = 0, mouseY = 0;
-  let trailX = 0, trailY = 0;
-  
+  // Track mouse movement
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top = mouseY + 'px';
+    // Create firefly trail with throttling for smoothness
+    const now = Date.now();
+    if (now - lastFireflyTime > 80) { // Throttle to every 80ms for smoother trail
+      createFirefly(mouseX, mouseY);
+      lastFireflyTime = now;
+    }
   });
   
-  // Smooth trail animation
-  function animateTrail() {
-    trailX += (mouseX - trailX) * 0.1;
-    trailY += (mouseY - trailY) * 0.1;
+  // Animate cursor
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.15;
+    cursorY += (mouseY - cursorY) * 0.15;
     
-    cursorTrail.style.left = trailX + 'px';
-    cursorTrail.style.top = trailY + 'px';
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
     
-    requestAnimationFrame(animateTrail);
+    requestAnimationFrame(animateCursor);
   }
-  animateTrail();
+  animateCursor();
   
-  // Magnetic effect for interactive elements
-  const magneticElements = document.querySelectorAll('a, button, .project-card, .skill-item');
+  // Hover effects for interactive elements
+  const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-item, .filter-btn, .contact-item, .cert-card, .modal-close, .hamburger, .theme-toggle, .back-to-top');
   
-  magneticElements.forEach(element => {
+  interactiveElements.forEach(element => {
     element.addEventListener('mouseenter', () => {
-      cursor.classList.add('magnetic');
+      cursor.classList.add('hover');
     });
     
     element.addEventListener('mouseleave', () => {
-      cursor.classList.remove('magnetic');
+      cursor.classList.remove('hover');
+    });
+    
+    element.addEventListener('mousedown', () => {
+      cursor.classList.add('click');
+      // Create explosion of fireflies on click
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => {
+          createFirefly(
+            mouseX + (Math.random() - 0.5) * 60,
+            mouseY + (Math.random() - 0.5) * 60,
+            true // Special explosion firefly
+          );
+        }, i * 30);
+      }
+    });
+    
+    element.addEventListener('mouseup', () => {
+      cursor.classList.remove('click');
     });
   });
+}
+
+function createFirefly(x, y, isExplosion = false) {
+  // Clean up old fireflies
+  if (fireflies.length >= maxFireflies) {
+    const oldFirefly = fireflies.shift();
+    if (oldFirefly && oldFirefly.parentNode) {
+      oldFirefly.parentNode.removeChild(oldFirefly);
+    }
+  }
+  
+  const firefly = document.createElement('div');
+  firefly.className = isExplosion ? 'firefly explosion' : 'firefly';
+  
+  // Smooth random offset for natural movement
+  const offsetX = (Math.random() - 0.5) * (isExplosion ? 40 : 20);
+  const offsetY = (Math.random() - 0.5) * (isExplosion ? 40 : 20);
+  
+  firefly.style.left = (x + offsetX) + 'px';
+  firefly.style.top = (y + offsetY) + 'px';
+  
+  // Add random size variation for more natural look
+  const size = isExplosion ? 4 + Math.random() * 4 : 3 + Math.random() * 3;
+  firefly.style.width = size + 'px';
+  firefly.style.height = size + 'px';
+  
+  document.body.appendChild(firefly);
+  fireflies.push(firefly);
+  
+  // Remove firefly after animation
+  const lifetime = isExplosion ? 2000 : 1800;
+  setTimeout(() => {
+    if (firefly.parentNode) {
+      firefly.parentNode.removeChild(firefly);
+      const index = fireflies.indexOf(firefly);
+      if (index > -1) {
+        fireflies.splice(index, 1);
+      }
+    }
+  }, lifetime);
 }
 
 // Navigation
@@ -300,13 +429,15 @@ function initializeScrollEffects() {
   }, observerOptions);
   
   // Observe elements for animation
-  const animateElements = document.querySelectorAll(
-    '.timeline-item, .project-card, .flip-card, .contact-item, .contact-form, .skill-item'
-  );
-  
-  animateElements.forEach(element => {
-    observer.observe(element);
-  });
+  setTimeout(() => {
+    const animateElements = document.querySelectorAll(
+      '.timeline-item, .project-card, .cert-card, .contact-item, .contact-form'
+    );
+    
+    animateElements.forEach(element => {
+      observer.observe(element);
+    });
+  }, 100);
 }
 
 // Typing Animation
@@ -314,7 +445,7 @@ function initializeTypingAnimation() {
   const typingElement = document.getElementById('typing-text');
   
   function type() {
-    const currentText = typingTexts[typingIndex];
+    const currentText = personalData.typingTexts[typingIndex];
     
     if (isDeleting) {
       typingElement.textContent = currentText.substring(0, charIndex - 1);
@@ -331,7 +462,7 @@ function initializeTypingAnimation() {
       isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
-      typingIndex = (typingIndex + 1) % typingTexts.length;
+      typingIndex = (typingIndex + 1) % personalData.typingTexts.length;
       typeSpeed = 500; // Pause before next word
     }
     
@@ -375,11 +506,18 @@ function initializeParticles() {
   }
 }
 
-// Skills Filter
+// Skills Filter - FIXED AND WORKING
 function initializeSkillFilters() {
   const filterButtons = document.querySelectorAll('.filter-btn');
   const skillItems = document.querySelectorAll('.skill-item');
   
+  // Show all skills initially
+  skillItems.forEach(item => {
+    item.style.display = 'block';
+    item.classList.add('visible');
+  });
+  
+  // Handle filter functionality
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
       const filter = button.getAttribute('data-filter');
@@ -393,23 +531,26 @@ function initializeSkillFilters() {
         const category = item.getAttribute('data-category');
         
         if (filter === 'all' || category === filter) {
-          item.classList.remove('hide');
-          item.classList.add('show');
+          // Show skill
+          item.style.display = 'block';
+          item.classList.remove('hidden');
+          item.classList.add('visible');
         } else {
-          item.classList.remove('show');
-          item.classList.add('hide');
+          // Hide skill
+          item.classList.remove('visible');
+          item.classList.add('hidden');
+          setTimeout(() => {
+            if (item.classList.contains('hidden')) {
+              item.style.display = 'none';
+            }
+          }, 300);
         }
       });
     });
   });
-  
-  // Initialize all skills as visible
-  skillItems.forEach(item => {
-    item.classList.add('show');
-  });
 }
 
-// Form Handling
+// Form Handling for Netlify
 function initializeFormHandling() {
   const contactForm = document.getElementById('contact-form');
   const formMessage = document.getElementById('form-message');
@@ -424,18 +565,22 @@ function initializeFormHandling() {
     submitButton.classList.add('loading');
     
     try {
-      // Simulate form submission (replace with actual endpoint)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+      });
       
-      // Show success message
-      showFormMessage('Thank you! Your message has been sent successfully.', 'success');
-      contactForm.reset();
+      if (response.ok) {
+        showFormMessage('Thank you! Your message has been sent successfully.', 'success');
+        contactForm.reset();
+      } else {
+        throw new Error('Network response was not ok');
+      }
       
     } catch (error) {
-      // Show error message
       showFormMessage('Sorry, there was an error sending your message. Please try again.', 'error');
     } finally {
-      // Remove loading state
       submitButton.classList.remove('loading');
     }
   });
@@ -452,20 +597,21 @@ function initializeFormHandling() {
 
 // Project Modals
 function initializeProjectModals() {
-  const projectCards = document.querySelectorAll('.project-card');
   const modal = document.getElementById('project-modal');
   const modalBody = document.getElementById('modal-body');
   const modalClose = document.querySelector('.modal-close');
   
-  projectCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const projectId = card.getAttribute('data-project');
-      const project = projectData[projectId];
+  // Add click listeners to project cards
+  document.addEventListener('click', (e) => {
+    const projectCard = e.target.closest('.project-card');
+    if (projectCard) {
+      const projectId = projectCard.getAttribute('data-project');
+      const project = personalData.projects.find(p => p.id === projectId);
       
       if (project) {
         showProjectModal(project);
       }
-    });
+    }
   });
   
   modalClose.addEventListener('click', hideProjectModal);
@@ -515,59 +661,6 @@ function initializeProjectModals() {
   }
 }
 
-// Initialize Animations
-function initializeAnimations() {
-  // Add CSS for modal styles
-  const modalStyles = `
-    .project-modal-description {
-      font-size: var(--font-size-lg);
-      color: var(--text-secondary);
-      margin-bottom: var(--spacing-xl);
-      line-height: var(--line-height-relaxed);
-    }
-    
-    .project-modal-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--spacing-sm);
-      margin-bottom: var(--spacing-xl);
-    }
-    
-    .project-modal-features {
-      margin-bottom: var(--spacing-xl);
-      padding-left: var(--spacing-lg);
-    }
-    
-    .project-modal-features li {
-      margin-bottom: var(--spacing-sm);
-      color: var(--text-secondary);
-    }
-    
-    .project-modal-links {
-      display: flex;
-      gap: var(--spacing-lg);
-      margin-top: var(--spacing-xl);
-      flex-wrap: wrap;
-    }
-    
-    #modal-body h2 {
-      color: var(--text-primary);
-      margin-bottom: var(--spacing-lg);
-      font-size: var(--font-size-2xl);
-    }
-    
-    #modal-body h3 {
-      color: var(--primary-color);
-      margin: var(--spacing-xl) 0 var(--spacing-md) 0;
-      font-size: var(--font-size-lg);
-    }
-  `;
-  
-  const styleSheet = document.createElement('style');
-  styleSheet.textContent = modalStyles;
-  document.head.appendChild(styleSheet);
-}
-
 // Back to Top Button
 function initializeBackToTop() {
   const backToTopButton = document.getElementById('back-to-top');
@@ -615,23 +708,6 @@ window.addEventListener('resize', debounce(() => {
   }
 }, 250));
 
-// Performance optimization
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(() => {
-    // Initialize non-critical features
-    console.log('Portfolio loaded successfully!');
-  });
-}
-
-// Service Worker registration (for PWA capabilities)
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    // navigator.serviceWorker.register('/sw.js')
-    //   .then(registration => console.log('SW registered'))
-    //   .catch(registrationError => console.log('SW registration failed'));
-  });
-}
-
 // Additional particle creation function (needed for resize handler)
 function createParticle() {
   const particlesContainer = document.getElementById('particles');
@@ -654,4 +730,11 @@ function createParticle() {
   particle.style.animationDelay = delay + 's';
   
   particlesContainer.appendChild(particle);
+}
+
+// Performance optimization
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(() => {
+    console.log('Portfolio loaded successfully!');
+  });
 }

@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akash Rai - Portfolio</title>
     <meta name="description" content="Akash Rai - Electrical Engineering Student & Developer Portfolio">
-    <script src="https://kit.fontawesome.com/e86e32551b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Custom Cursor -->
-    <div id="cursor" class="cursor"></div>
-    <div id="cursor-trail" class="cursor-trail"></div>
+    <div id="cursor" class="cursor">
+        <div class="cursor-inner"></div>
+        <div class="cursor-outer"></div>
+    </div>
 
     <!-- Preloader -->
     <div id="preloader" class="preloader">
@@ -60,15 +62,15 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1 class="hero-name">
-                        <span class="name-first">Akash</span>
-                        <span class="name-last">Rai</span>
+                        <span class="name-first" id="hero-first-name">Akash</span>
+                        <span class="name-last" id="hero-last-name">Rai</span>
                     </h1>
                     <div class="typing-container">
                         <span class="typing-prefix">Passionate about</span>
                         <span id="typing-text" class="typing-text"></span>
                         <span class="cursor-blink">|</span>
                     </div>
-                    <p class="hero-description">
+                    <p class="hero-description" id="hero-description">
                         Electrical Engineering student at RGIPT, exploring the intersection of 
                         technology, creativity, and innovation through AI, web development, and sound engineering.
                     </p>
@@ -98,35 +100,8 @@
                     <h2 class="section-title">Education</h2>
                     <p class="section-subtitle">My academic journey</p>
                 </div>
-                <div class="timeline">
-                    <div class="timeline-item" data-year="2024-2028">
-                        <div class="timeline-content glass-card">
-                            <div class="timeline-marker"></div>
-                            <h3>B.Tech in Electrical Engineering</h3>
-                            <h4>E-Vehicle Technology Specialization</h4>
-                            <p class="institution">Rajiv Gandhi Institute of Petroleum Technology</p>
-                            <p class="location">Raebareli, Uttar Pradesh, India</p>
-                            <span class="timeline-year">2024 - 2028 (Expected)</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item" data-year="2023">
-                        <div class="timeline-content glass-card">
-                            <div class="timeline-marker"></div>
-                            <h3>Higher Secondary (12th)</h3>
-                            <p class="institution">Kumud Lata Convent School</p>
-                            <p class="location">Prayagraj, Uttar Pradesh, India</p>
-                            <span class="timeline-year">2023</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item" data-year="2021">
-                        <div class="timeline-content glass-card">
-                            <div class="timeline-marker"></div>
-                            <h3>Secondary (10th)</h3>
-                            <p class="institution">Bethany Convent Senior Secondary School</p>
-                            <p class="location">Prayagraj, Uttar Pradesh, India</p>
-                            <span class="timeline-year">2021</span>
-                        </div>
-                    </div>
+                <div class="timeline" id="education-timeline">
+                    <!-- Timeline items will be populated by JavaScript -->
                 </div>
             </div>
         </section>
@@ -145,133 +120,15 @@
                     <h2 class="section-title">Skills</h2>
                     <p class="section-subtitle">Technologies and tools I work with</p>
                 </div>
-                <div class="skills-filters">
+                <div class="skills-filters" id="skills-filters">
                     <button class="filter-btn active" data-filter="all">All</button>
                     <button class="filter-btn" data-filter="programming">Programming</button>
                     <button class="filter-btn" data-filter="frameworks">Frameworks</button>
                     <button class="filter-btn" data-filter="tools">Tools</button>
                     <button class="filter-btn" data-filter="special">Special Skills</button>
                 </div>
-                <div class="skills-grid">
-                    <!-- Programming Languages -->
-                    <div class="skill-item glass-card" data-category="programming">
-                        <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
-                        <h3>HTML</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="programming">
-                        <div class="skill-icon"><i class="fa-brands fa-css3-alt"></i></div>
-                        <h3>CSS</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="programming">
-                        <div class="skill-icon"><i class="fa-brands fa-js"></i></div>
-                        <h3>JavaScript</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="programming">
-                        <div class="skill-icon"><i class="fa-solid fa-c"></i></div>
-                        <h3>C</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="programming">
-                        <div class="skill-icon">©️➕</div>
-                        <h3>C++</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="programming">
-                        <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
-                        <h3>Python</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="programming">
-                        <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
-                        <h3>SQL</h3>
-                    </div>
-
-                    <!-- Frameworks & Libraries -->
-                    <div class="skill-item glass-card" data-category="frameworks">
-                        <div class="skill-icon">🎵</div>
-                        <h3>JUCE</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="frameworks">
-                        <div class="skill-icon">🔢</div>
-                        <h3>NumPy</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="frameworks">
-                        <div class="skill-icon">🐼</div>
-                        <h3>Pandas</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="frameworks">
-                        <div class="skill-icon"><i class="fa-solid fa-chart-simple"></i></div>
-                        <h3>Matplotlib</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="frameworks">
-                        <div class="skill-icon">🔥</div>
-                        <h3>PyTorch</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="frameworks">
-                        <div class="skill-icon">🧠</div>
-                        <h3>TensorFlow</h3>
-                    </div>
-
-                    <!-- Tools -->
-                    <div class="skill-item glass-card" data-category="tools">
-                        <div class="skill-icon"><i class="fa-brands fa-github"></i></div>
-                        <h3>GitHub</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="tools">
-                        <div class="skill-icon">📐</div>
-                        <h3>MATLAB</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="tools">
-                        <div class="skill-icon">🔧</div>
-                        <h3>Simulink</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="tools">
-                        <div class="skill-icon">⚡</div>
-                        <h3>LT Spice</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="tools">
-                        <div class="skill-icon">📓</div>
-                        <h3>Jupyter</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="tools">
-                        <div class="skill-icon">🎭</div>
-                        <h3>Blender</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="tools">
-                        <div class="skill-icon">🎬</div>
-                        <h3>Premiere Pro</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="tools">
-                        <div class="skill-icon">✨</div>
-                        <h3>After Effects</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="tools">
-                        <div class="skill-icon">🎨</div>
-                        <h3>Canva</h3>
-                    </div>
-
-                    <!-- Special Skills -->
-                    <div class="skill-item glass-card" data-category="special">
-                        <div class="skill-icon">🎧</div>
-                        <h3>Sound Engineering</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="special">
-                        <div class="skill-icon">🤖</div>
-                        <h3>Prompt Engineering</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="special">
-                        <div class="skill-icon">🐧</div>
-                        <h3>Linux OS</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="special">
-                        <div class="skill-icon">🎚️</div>
-                        <h3>Pro Tools</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="special">
-                        <div class="skill-icon">🎵</div>
-                        <h3>Ableton Live</h3>
-                    </div>
-                    <div class="skill-item glass-card" data-category="special">
-                        <div class="skill-icon">🖨️</div>
-                        <h3>3D-Printing</h3>
-                    </div>
+                <div class="skills-grid" id="skills-grid">
+                    <!-- Skills will be populated by JavaScript -->
                 </div>
             </div>
         </section>
@@ -290,99 +147,8 @@
                     <h2 class="section-title">Projects</h2>
                     <p class="section-subtitle">Some of my recent work</p>
                 </div>
-                <div class="projects-grid">
-                    <div class="project-card clay-card" data-project="cruciatus">
-                        <div class="project-image">
-                            <div class="project-icon">🧮</div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Cruciatus – AI Math Solver</h3>
-                            <p>AI-powered handwritten equation detection and solving system</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Flask</span>
-                                <span class="tech-tag">SQLite</span>
-                                <span class="tech-tag">Gemini API</span>
-                                <span class="tech-tag">PyTorch</span>
-                                <span class="tech-tag">OpenCV</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card clay-card" data-project="startup-portal">
-                        <div class="project-image">
-                            <div class="project-icon">🏢</div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Startup Registration Portal</h3>
-                            <p>Web portal for Ministry of AYUSH with multilingual support</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Django</span>
-                                <span class="tech-tag">Bootstrap</span>
-                                <span class="tech-tag">JavaScript</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card clay-card" data-project="handwriting-ai">
-                        <div class="project-image">
-                            <div class="project-icon">✍️</div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Handwritten Character Recognition</h3>
-                            <p>CNN model achieving 98% accuracy on character recognition</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">CNN</span>
-                                <span class="tech-tag">EMNIST</span>
-                                <span class="tech-tag">MNIST</span>
-                                <span class="tech-tag">Python</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card clay-card" data-project="todo-app">
-                        <div class="project-image">
-                            <div class="project-icon">📝</div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Todo List Application</h3>
-                            <p>Full-stack web app with user authentication and database</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Flask</span>
-                                <span class="tech-tag">SQLite</span>
-                                <span class="tech-tag">Authentication</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card clay-card" data-project="tux-lite">
-                        <div class="project-image">
-                            <div class="project-icon">🐧</div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Tux-lite Linux Distro</h3>
-                            <p>Custom LXQt Arch Linux build optimized for legacy hardware</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Arch Linux</span>
-                                <span class="tech-tag">LXQt</span>
-                                <span class="tech-tag">systemd</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card clay-card" data-project="equalizer">
-                        <div class="project-image">
-                            <div class="project-icon">🎚️</div>
-                        </div>
-                        <div class="project-content">
-                            <h3>3Q – 3-Band Equalizer Plugin</h3>
-                            <p>Real-time DSP audio plugin with spectrum analyzer</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">C++</span>
-                                <span class="tech-tag">JUCE</span>
-                                <span class="tech-tag">DSP</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Projects will be populated by JavaScript -->
                 </div>
             </div>
         </section>
@@ -401,66 +167,8 @@
                     <h2 class="section-title">Certifications & Awards</h2>
                     <p class="section-subtitle">Recognition and achievements</p>
                 </div>
-                <div class="certifications-grid">
-                    <div class="cert-card flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front clay-card">
-                                <div class="cert-icon">🏆</div>
-                                <h3>KodeKurrent 2025</h3>
-                                <p>Finalist</p>
-                            </div>
-                            <div class="flip-card-back clay-card">
-                                <h3>KodeKurrent 2025</h3>
-                                <p>Achieved finalist position in the prestigious coding competition organized by IEEE SB RGIPT.</p>
-                                <span class="cert-year">2025</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cert-card flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front clay-card">
-                                <div class="cert-icon">🎓</div>
-                                <h3>Reliance Foundation</h3>
-                                <p>UG Scholar</p>
-                            </div>
-                            <div class="flip-card-back clay-card">
-                                <h3>Reliance Foundation Scholar</h3>
-                                <p>Selected among top 5000 students out of 100,000+ applicants for the undergraduate scholarship program.</p>
-                                <span class="cert-year">2024</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cert-card flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front clay-card">
-                                <div class="cert-icon">🥇</div>
-                                <h3>International Math Olympiad</h3>
-                                <p>4x Gold Medalist</p>
-                            </div>
-                            <div class="flip-card-back clay-card">
-                                <h3>Math Olympiad Champion</h3>
-                                <p>Gold medals in International Mathematics Olympiad for four consecutive years.</p>
-                                <span class="cert-year">2016, 2018, 2019, 2020</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cert-card flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front clay-card">
-                                <div class="cert-icon">💻</div>
-                                <h3>National CS Olympiad</h3>
-                                <p>Gold Medalist</p>
-                            </div>
-                            <div class="flip-card-back clay-card">
-                                <h3>Computer Science Excellence</h3>
-                                <p>Awarded gold medal in National Computer Science Olympiad for exceptional programming skills.</p>
-                                <span class="cert-year">2018</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="certifications-grid" id="certifications-grid">
+                    <!-- Certifications will be populated by JavaScript -->
                 </div>
             </div>
         </section>
@@ -480,28 +188,14 @@
                     <p class="section-subtitle">Let's work together</p>
                 </div>
                 <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item glass-card">
-                            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-                            <h3>Phone</h3>
-                            <p>+91-9125-106-501</p>
-                        </div>
-                        <div class="contact-item glass-card">
-                            <div class="contact-icon"><i class="fa-solid fa-paper-plane"></i></div>
-                            <h3>Email</h3>
-                            <p><a href="mailto:raiakash1204@gmail.com">raiakash1204@gmail.com</a></p>
-                        </div>
-                        <div class="contact-item glass-card">
-                            <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
-                            <h3><a href="https://www.github.com/raiakash1204">GitHub</a></h3>
-                            <p></p>
-                        </div>
-                        <div class="contact-item glass-card">
-                            <div class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></div>
-                            <h3><a href="https://www.linkedin.com/in/raiakash1204/">LinkedIn</a></h3>                            
-                        </div>
+                    <div class="contact-info" id="contact-info">
+                        <!-- Contact info will be populated by JavaScript -->
                     </div>
-                    <form id="contact-form" class="contact-form glass-card" netlify>
+                    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="contact-form" class="contact-form glass-card">
+                        <input type="hidden" name="form-name" value="contact" />
+                        <p style="display: none;">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
                         <div class="form-group">
                             <input type="text" id="name" name="name" required>
                             <label for="name">Your Name</label>
@@ -544,6 +238,7 @@
         </svg>
     </button>
 
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
