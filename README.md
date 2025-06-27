@@ -85,7 +85,7 @@ netlify deploy      # Manual deploy (or auto via Git hooks)
 
 ---
 
-## **Competition-Ready Highlights**  
+## **Highlights**  
 
 ### **1. Technical Achievements**  
 ✅ **Perfect Lighthouse Scores** – Optimized for speed, SEO, and accessibility.  

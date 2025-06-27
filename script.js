@@ -8,7 +8,7 @@ let isDeleting = false;
 let mouseX = 0, mouseY = 0;
 let cursorX = 0, cursorY = 0;
 let fireflies = [];
-const maxFireflies = 100;
+const maxFireflies = 12;
 let lastFireflyTime = 0;
 
 // Initialize application
