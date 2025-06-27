@@ -97,7 +97,23 @@ const personalData = {
     ]
   },
 
-  // Projects Data
+  // // Projects Data
+  //    id: ,
+//      title: ,
+//      shortDescription: ,
+//      fullDescription: ,
+//      icon: ,
+//      technologies: [],
+//      features: [
+//   
+//     ],
+//      challenges: ,
+//      github: "",
+//      demo: ""
+
+
+
+
   projects: [
     {
       id: "cruciatus",
@@ -118,23 +134,24 @@ const personalData = {
       demo: "#"
     },
     {
-      id: "startup-portal",
-      title: "Startup Registration Portal",
-      shortDescription: "Web portal for Ministry of AYUSH with multilingual support",
-      fullDescription: "A comprehensive web portal developed for the Ministry of AYUSH supporting multilingual startup registrations. Built as part of SIH1642, this portal streamlines the startup registration process for the Ministry of AYUSH. The system supports multiple Indian languages and provides a user-friendly interface for entrepreneurs.",
-      icon: "🏢",
-      technologies: ["Django", "Bootstrap", "JavaScript", "SQLite", "HTML5", "CSS3"],
-      features: [
-        "Multilingual support (Hindi, English, and regional languages)",
-        "Document upload and verification",
-        "Application status tracking",
-        "Admin dashboard for processing",
-        "Email notifications and alerts"
-      ],
-      challenges: "Implementing robust multilingual support while ensuring data consistency across different language inputs required careful database design and extensive testing.",
-      github: "https://github.com/raiakash1204",
-      demo: "#"
-    },
+  id: "scriba",
+  title: "Scriba – Resume Builder",
+  shortDescription: "An intuitive and modern resume builder web app",
+  fullDescription: "Scriba is a web-based resume builder that helps users create professional resumes quickly. It offers easy editing, multiple templates, and export options like PDF/DOCX. Built with React and Node.js, it supports real-time previews and version management. Free and open-source for everyone.",
+  icon: "📄",
+  technologies: ["TypeScript", "React", "Node.js", "Netlify", "HTML5", "CSS3"],
+  features: [
+    "Interactive resume editor with sections",
+    "Export as PDF, DOCX, etc.",
+    "Modern, customizable templates",
+    "Manage multiple resume versions",
+    "Live preview with instant updates"
+  ],
+  challeges: "Balancing flexible templates with smooth real-time editing was tricky. Also tackled cross-browser issues and reliable export features.",
+  github: "https://github.com/raiakash1204/Scriba",
+  demo: "https://scriba-resume.netlify.app/"
+},   
+
     {
       id: "handwriting-ai",
       title: "Handwritten Character Recognition",
